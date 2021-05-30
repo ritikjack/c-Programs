@@ -19,17 +19,19 @@ void randomInsert();
 
 void begdelete();
 void lastdelete();
+void randomdelete();
 
 void main()
 {
     createnode();
     display();
     // begInsert();
-    //          // lastInsert();
+    // lastInsert();
     // randomInsert();
     
     // begdelete();
-    lastdelete();
+    // lastdelete();
+    // randomdelete();
 }
 
 void createnode()
@@ -131,20 +133,17 @@ void lastInsert()
         {
             ptr->next=NULL;
             head=ptr;
-            printf("node inserted.");
         }
         else
         {
             temp=head;
-            while(temp!=NULL)
+            while(temp->next!=NULL)
             {
                 temp=temp->next;
             }
             
             temp->next=ptr;
             ptr->next=NULL;
-            printf("NodeINserted.");
-            
         }
         printf("\ndata inserted in the last.\n");
         display();
@@ -234,5 +233,40 @@ void lastdelete()
         free(ptr);
         printf("\nnode deleted from last.\n");
         display();
+    }
+}
+
+
+void randomdelete()
+{
+    node *ptr,*prev;
+    int i,loc;
+    
+    if(head==NULL)
+    {
+        printf("\nlist is empty.");
+    }
+    else
+    {
+        printf("\nenter the location which data you want to delete:\n");
+        scanf("%d",&loc);
+        
+        ptr=head;
+        for(i=1;i<loc;i++)
+        {
+            prev=ptr;
+            ptr=ptr->next;
+        }
+        if(ptr==NULL)
+        {
+            printf("\nwrong location.");
+        }
+        else
+        {
+            prev->next=ptr->next;
+            free(ptr);
+            printf("\ndata deleted of %d location.\n",loc);
+            display();
+        }
     }
 }
